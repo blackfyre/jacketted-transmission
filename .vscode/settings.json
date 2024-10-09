@@ -1,0 +1,26 @@
+{
+    "cSpell.words": [
+        "automigrate",
+        "chardata",
+        "dtos",
+        "hekmon",
+        "iofs",
+        "jackett",
+        "jacketted",
+        "Jackettindexer",
+        "jmoiron",
+        "mattn",
+        "sqlx",
+        "torznab",
+        "transmissionrpc"
+    ],
+    "sqltools.useNodeRuntime": true,
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "mehh",
+            "database": "${workspaceFolder:jackettedTransmission}/db.sqlite"
+        }
+    ]
+}
