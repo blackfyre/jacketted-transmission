@@ -1,0 +1,16 @@
+jackett:
+  sources:
+    - rss_url: "http://"
+      target_folder: ""
+      seed_minutes: 5000
+      ratio: 2.0
+
+transmission:
+  host: 192.168.X.X
+  port: 9091
+  user: "admin"
+  password: "admin"
+
+app:
+  log_retention_days: 7
+  tracker_retention_days: 7
