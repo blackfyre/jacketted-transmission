@@ -2,6 +2,7 @@ package main
 
 import (
 	"os"
+	"time"
 )
 
 func startUpTasks(app *app) error {
@@ -25,5 +26,10 @@ func (app *app) governor() error {
 
 	app.RemoveTorrents()
 	app.checkSources()
+
+	retentionDuration := time.Duration(app.config.App.TrackerRetentionDays) * 24 * time.Hour
+	cutoffTime := time.Now().Add(-retentionDuration)
+
+	app.db.DeleteTrackersOlderThan(cutoffTime.Format("2006-01-02 15:04:05"))
 	return nil
 }
