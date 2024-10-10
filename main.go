@@ -94,7 +94,5 @@ func run(logger *slog.Logger) error {
 	app.sourceToRun = flag.Int("source", 0, "source to run")
 	flag.Parse()
 
-	fmt.Printf("sourceToRun: %d\n", *app.sourceToRun)
-
 	return app.governor()
 }
