@@ -120,6 +120,15 @@ func (app *app) RemoveTorrents() error {
 			IDs:             removalList,
 			DeleteLocalData: true,
 		})
+
+		if err != nil {
+			app.logger.Error("failed to remove torrents", "error", err)
+			return err
+		}
+
+		app.logger.Info("removed torrents", "number", len(removalList))
+	} else {
+		app.logger.Info("no torrents to remove")
 	}
 
 	return nil
