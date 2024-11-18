@@ -7,7 +7,7 @@ require (
 	github.com/hekmon/transmissionrpc/v3 v3.0.0
 	github.com/jmoiron/sqlx v1.4.0
 	gopkg.in/yaml.v2 v2.4.0
-	modernc.org/sqlite v1.33.1
+	modernc.org/sqlite v1.34.1
 )
 
 require (
