@@ -104,7 +104,7 @@ func (app *app) RemoveTorrents() error {
 
 		if err != nil {
 			app.logger.Error("failed to get tracker by hash", "error", err)
-			return err
+			continue
 		}
 
 		minSeedDuration := time.Duration(tracker.TransmissionSeedTime) * time.Minute
