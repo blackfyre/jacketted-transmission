@@ -103,7 +103,8 @@ func (app *app) RemoveTorrents() error {
 		tracker, err := app.db.GetTrackerByHash(*torrent.HashString)
 
 		if err != nil {
-			app.logger.Error("failed to get tracker by hash", "error", err)
+			app.logger.Error(fmt.Sprintf("failed to get tracker by hash %s", *torrent.HashString), "error", err)
+			app.logger.Info("Skipping torrent", "name", *torrent.Name)
 			continue
 		}
 
