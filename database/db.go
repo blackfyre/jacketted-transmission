@@ -11,7 +11,7 @@ import (
 	"github.com/golang-migrate/migrate/v4/source/iofs"
 	"github.com/jmoiron/sqlx"
 
-	_ "github.com/golang-migrate/migrate/v4/database/sqlite3"
+	_ "github.com/golang-migrate/migrate/v4/database/sqlite"
 	_ "modernc.org/sqlite"
 )
 
@@ -25,7 +25,7 @@ func New(dsn string, automigrate bool) (*DB, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), defaultTimeout)
 	defer cancel()
 
-	db, err := sqlx.ConnectContext(ctx, "sqlite3", dsn)
+	db, err := sqlx.ConnectContext(ctx, "sqlite", dsn)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ func New(dsn string, automigrate bool) (*DB, error) {
 			return nil, err
 		}
 
-		migrator, err := migrate.NewWithSourceInstance("iofs", iofsDriver, "sqlite3://"+dsn)
+		migrator, err := migrate.NewWithSourceInstance("iofs", iofsDriver, "sqlite://"+dsn)
 		if err != nil {
 			return nil, err
 		}
