@@ -8,7 +8,6 @@
   packages = [ 
     pkgs.git
     pkgs.goreleaser
-    pkgs.gcc6
   ];
 
   # https://devenv.sh/languages/
