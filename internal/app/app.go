@@ -4,8 +4,8 @@ import (
 	"log/slog"
 	"sync"
 
-	"github.com/blackfyre/jacketted-transmission/database"
 	"github.com/blackfyre/jacketted-transmission/internal/assets/dtos"
+	"github.com/blackfyre/jacketted-transmission/internal/database"
 	"github.com/hekmon/transmissionrpc/v3"
 )
 

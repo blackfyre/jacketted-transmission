@@ -7,9 +7,9 @@ import (
 	"os"
 	"runtime/debug"
 
-	"github.com/blackfyre/jacketted-transmission/database"
 	appsvc "github.com/blackfyre/jacketted-transmission/internal/app"
 	"github.com/blackfyre/jacketted-transmission/internal/assets/dtos"
+	"github.com/blackfyre/jacketted-transmission/internal/database"
 	"github.com/blackfyre/jacketted-transmission/internal/version"
 	"gopkg.in/yaml.v2"
 )
