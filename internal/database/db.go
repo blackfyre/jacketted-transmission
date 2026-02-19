@@ -5,7 +5,7 @@ import (
 	"errors"
 	"time"
 
-	"github.com/blackfyre/jacketted-transmission/assets"
+	"github.com/blackfyre/jacketted-transmission/internal/assets"
 
 	"github.com/golang-migrate/migrate/v4"
 	"github.com/golang-migrate/migrate/v4/source/iofs"

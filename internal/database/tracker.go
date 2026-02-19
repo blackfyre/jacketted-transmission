@@ -32,7 +32,7 @@ func (db *DB) UpdateTracker(guid string, txResult string, ratio float64, seedTim
 	return err
 }
 
-func (db *DB) DeleteTrackersOlderThan(created_at string) error {
-	_, err := db.Exec("DELETE FROM tracker WHERE created_at < $1", created_at)
+func (db *DB) DeleteTrackersOlderThan(createdAt string) error {
+	_, err := db.Exec("DELETE FROM tracker WHERE created_at < $1", createdAt)
 	return err
 }

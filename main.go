@@ -3,28 +3,16 @@ package main
 import (
 	"flag"
 	"fmt"
-	"log"
 	"log/slog"
 	"os"
 	"runtime/debug"
-	"sync"
 
-	"github.com/blackfyre/jacketted-transmission/assets/dtos"
 	"github.com/blackfyre/jacketted-transmission/database"
-	"github.com/blackfyre/jacketted-transmission/version"
-	"github.com/hekmon/transmissionrpc/v3"
+	appsvc "github.com/blackfyre/jacketted-transmission/internal/app"
+	"github.com/blackfyre/jacketted-transmission/internal/assets/dtos"
+	"github.com/blackfyre/jacketted-transmission/internal/version"
 	"gopkg.in/yaml.v2"
 )
-
-type app struct {
-	config             dtos.Config
-	ic                 dtos.InternalConfig
-	db                 *database.DB
-	logger             *slog.Logger
-	wg                 sync.WaitGroup
-	transmissionClient *transmissionrpc.Client
-	sourceToRun        *int
-}
 
 func main() {
 
@@ -64,11 +52,11 @@ func run(logger *slog.Logger) error {
 
 	err = yaml.Unmarshal(data, &config)
 	if err != nil {
-		log.Fatalf("error: %v", err)
+		return err
 	}
 
 	if config.Jackett.Sources == nil {
-		log.Fatalf("error: no sources defined")
+		return fmt.Errorf("no sources defined")
 	}
 
 	iCfg.DB.Dsn = "db.sqlite"
@@ -82,17 +70,13 @@ func run(logger *slog.Logger) error {
 	}
 	defer db.Close()
 
-	app := &app{
-		ic:     iCfg,
-		config: config,
-		db:     db,
-		logger: logger,
-	}
-
-	app.createTransmissionClient(config.Transmission.Host, config.Transmission.Port, config.Transmission.User, config.Transmission.Password)
-
-	app.sourceToRun = flag.Int("source", 0, "source to run")
+	sourceToRun := flag.Int("source", 0, "source to run")
 	flag.Parse()
 
-	return app.governor()
+	app, err := appsvc.New(config, iCfg, db, logger, *sourceToRun)
+	if err != nil {
+		return err
+	}
+
+	return app.Run()
 }
